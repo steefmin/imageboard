@@ -1,9 +1,11 @@
-import Vue from 'vue';
-import App from './App.vue';
-import VueIpfs from './plugins/vue-ipfs';
+import Vue from 'vue'
+import App from './App.vue'
+import Buefy from 'buefy'
+import VueIpfs from './plugins/vue-ipfs'
+import 'buefy/dist/buefy.css'
 
-// Load our IPFS plugin.
 Vue.use(VueIpfs);
+Vue.use(Buefy)
 
 Vue.config.productionTip = false;
 

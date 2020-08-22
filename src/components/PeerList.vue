@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Connected nodes: {{ swarm.length }}</h2>
+    <p>last updated: {{ time }}</p>
     <ul id="swarm">
       <li v-for="addr in swarm" :key="addr.id">
         {{ addr.id }}
@@ -14,7 +15,8 @@ export default {
   name: 'PeerList',
   data: function () {
     return {
-      swarm: []
+      swarm: [],
+      time: ''
     }
   },
   mounted () {
@@ -28,6 +30,8 @@ export default {
       try {
         const ipfs = await this.$ipfs
         this.swarm = await ipfs.swarm.addrs()
+        const time = new Date()
+        this.time = time.toTimeString().substring(0, 8)
       } catch (err) {
         console.error(err)
       }

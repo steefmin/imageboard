@@ -1,15 +1,35 @@
 <template>
   <div id="app">
-    <ipfs-info />
+    <div class="columns">
+      <div class="column">
+        <ipfs-info />
+      </div>
+      <div class="column">
+        <peer-list />
+      </div>
+      <div class="column">
+        <image-list />
+      </div>
+      <div class="column">
+        <hash-input />
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import IpfsInfo from "./components/IpfsInfo.vue";
+import PeerList from '@/components/PeerList'
+import ImageList from '@/components/ImageList'
+import HashInput from '@/components/HashInput'
 
 export default {
   name: "app",
   components: {
+    HashInput,
+    ImageList,
+    PeerList,
     IpfsInfo
   }
 };

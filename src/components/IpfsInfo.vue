@@ -1,29 +1,25 @@
 <template>
   <div class="ipfs-info">
-    <img id="image" class="ipfs-logo" alt="IPFS logo" v-bind:src="image"/>
+    <img id="image" class="ipfs-logo" alt="IPFS logo" src="../assets/logo.svg"/>
     <h1>{{ status }}</h1>
     <h2>ID: {{ id }}</h2>
     <h2>Agent version: {{ agentVersion }}</h2>
-    <peer-list/>
   </div>
 </template>
 
 <script>
-import PeerList from '@/components/PeerList'
 export default {
   name: 'IpfsInfo',
-  components: {PeerList},
+  components: {},
   data: function () {
     return {
       status: 'Connecting to IPFS...',
       id: '',
       agentVersion: '',
-      image: '../assets/logo.svg'
     }
   },
   mounted: function () {
     this.getIpfsNodeInfo()
-    this.getImage()
   },
   methods: {
     async getIpfsNodeInfo () {
@@ -42,20 +38,7 @@ export default {
         this.status = `Error: ${err}`
       }
     },
-    async getImage() {
-      try {
-        const ipfs = await this.$ipfs;
-        const chunks = []
-        for await (const chunk of ipfs.cat('QmNdUGdjQDbUoDcJxjnnzbdqXsvrpZqsvMXggYDcjHsvcQ')) {
-          chunks.push(chunk)
-        }
-        let image = Buffer.concat(chunks).toString("Base64")
-        console.log('image', image)
-        this.image = 'data:image;base64,' + image;
-      } catch (err) {
-        console.error(err)
-      }
-    }
+
   }
 }
 
